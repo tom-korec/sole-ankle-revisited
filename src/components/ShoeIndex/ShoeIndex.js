@@ -1,20 +1,30 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { WEIGHTS } from '../../constants';
+import { WEIGHTS } from "../../constants";
 
-import Breadcrumbs from '../Breadcrumbs';
-import Select from '../Select';
-import Spacer from '../Spacer';
-import ShoeSidebar from '../ShoeSidebar';
-import ShoeGrid from '../ShoeGrid';
+import Breadcrumbs from "../Breadcrumbs";
+import Select from "../Select";
+import Spacer from "../Spacer";
+import ShoeSidebar from "../ShoeSidebar";
+import ShoeGrid from "../ShoeGrid";
+import { MEDIA } from "../../css";
 
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
         <Header>
-          <Title>Running</Title>
+          <TitleWrapper>
+            <MobileBreadcrumbs>
+              <Breadcrumbs>
+                <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+                <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+                <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+              </Breadcrumbs>
+            </MobileBreadcrumbs>
+            <Title>Running</Title>
+          </TitleWrapper>
           <Select
             label="Sort"
             value={sortId}
@@ -31,9 +41,7 @@ const ShoeIndex = ({ sortId, setSortId }) => {
         <Breadcrumbs>
           <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
           <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale/shoes">
-            Shoes
-          </Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
         </Breadcrumbs>
         <Spacer size={42} />
         <ShoeSidebar />
@@ -49,8 +57,24 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MobileBreadcrumbs = styled.div`
+  display: none;
+  @media (${MEDIA.tabletsAndSmaller}) {
+    display: revert;
+  }
+`;
+
 const LeftColumn = styled.div`
   flex-basis: 248px;
+
+  @media (${MEDIA.tabletsAndSmaller}) {
+    display: none;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -61,6 +85,15 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  
+  @media (${MEDIA.tabletsAndSmaller}){
+    align-items: flex-end;
+  }
+  @media (${MEDIA.justPhone}) {
+    & label {
+      display: none;
+    }
+  }
 `;
 
 const Title = styled.h2`

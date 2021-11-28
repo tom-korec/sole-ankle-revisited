@@ -6,6 +6,7 @@ import { COLORS } from '../../constants';
 import SearchInput from '../SearchInput';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
+import {MEDIA} from "../../css";
 
 const SuperHeader = () => {
   return (
@@ -32,6 +33,17 @@ const Wrapper = styled.div`
   height: 40px;
   padding-left: 32px;
   padding-right: 32px;
+  
+  @media (${MEDIA.tabletsAndSmaller}){
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    > * {
+      display: none;
+    }
+  }
 `;
 
 const MarketingMessage = styled.span`
